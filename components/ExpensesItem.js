@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     margin: 10,
-    backgroundColor: "#3e04c3",
+    backgroundColor: "green",
     borderRadius: 10,
     flexDirection: "row",
     justifyContent: "space-between",
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     color: "white",
   },
   description: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: "bold",
     marginBottom: 5,
     fontWeight: "bold",
