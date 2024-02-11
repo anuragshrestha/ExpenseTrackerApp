@@ -1,10 +1,17 @@
 import { TextInput, View, Text, StyleSheet } from "react-native";
 
  function Input({children, inputConfig}){
+
+  const  textInputs = [styles.textInput]
+  
+if(inputConfig && inputConfig.multiline){
+    textInputs.push(styles.inputMultiline);
+}
+
     return(
         <View style = {styles.container}>
             <Text style = {styles.text}>{children}</Text>
-            <TextInput style = {styles.textInput} {...inputConfig}/>
+            <TextInput style = {textInputs} {...inputConfig}/>
         </View>
     )
  }
@@ -12,7 +19,6 @@ import { TextInput, View, Text, StyleSheet } from "react-native";
   
 const styles = StyleSheet.create({
     container:{
-        marginHorizontal: 2,
         marginVertical: 10,
     },
     text:{
@@ -29,7 +35,10 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#2d0689',
         padding: 6,
-
+    },
+    inputMultiline:{
+        minHeight: 100,
+        textAlignVertical: 'top'
     }
 })
 
