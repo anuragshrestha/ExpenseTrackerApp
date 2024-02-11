@@ -15,7 +15,7 @@ function RecentExpenses(){
      const today =  new Date();
      const sevenDays = getDate(today, 7);
 
-     return (expense.date >= sevenDays) && (expense.date() <= today);
+     return (expense.date >= sevenDays) && (expense.date <= today);
    })
    return(
       <ExpensesOutput expenses={recentExpenses} periodName= "Last 7 days "/>
