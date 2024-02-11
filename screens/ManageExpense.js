@@ -3,6 +3,7 @@ import {Text, View , StyleSheet}from 'react-native'
  import IconButton from '../UI/IconButton'
 import Button from '../UI/Button';
 import { ExpensesContext } from '../store/expenses-contextAPI';
+import ExpensesInput from '../components/TextInput/ExpensesInput';
  
 
  
@@ -50,6 +51,7 @@ function ManageExpense({route, navigation}){
 
    return(
         <View style = {styles.container}>
+          <ExpensesInput/>
           <View style = {styles.button}>
           <Button  style = {styles.buttons}   onPress={cancelExpenseHandler}>
              Cancel
