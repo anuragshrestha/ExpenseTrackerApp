@@ -9,6 +9,7 @@ function ExpensesInput() {
         children="Description"
         inputConfig={{
           autoCorrect :  false,
+          multiline: true,
         }}
       />
       <Input
@@ -16,7 +17,7 @@ function ExpensesInput() {
         inputConfig={{
          maxLength : 10,
           onChangeText: amountchangeHandler,
-          KeyboardType: 'number-pad'
+          keyboardType: 'number-pad'
         }}
       />
       <Input children="Date" inputConfig={{
