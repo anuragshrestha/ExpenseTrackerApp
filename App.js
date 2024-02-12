@@ -63,7 +63,7 @@ function ScreensOverView() {
 export default function App() {
   return (
     <>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
       <ExpensesContextProvider>
 
      
