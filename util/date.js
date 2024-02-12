@@ -1,6 +1,6 @@
  export function formatDate(date){
     return(
-        `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+     date.toISOString().slice(0,10)
     )
  }
 
