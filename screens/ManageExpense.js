@@ -13,6 +13,8 @@ function ManageExpense({route, navigation}){
     const hasId = !!editExpense;
      const expenseContext = useContext(ExpensesContext);
 
+     const selectedMeal = expenseContext.expenses.find(expense => expense.id === editExpense);
+
       useLayoutEffect(() => {
         navigation.setOptions({
             title: hasId? 'Edit Expense' : 'Add Expense',
@@ -43,7 +45,7 @@ function ManageExpense({route, navigation}){
 
    return(
         <View style = {styles.container}>
-          <ExpensesInput hasId = {hasId ? "Update" : "Add"} oncancel={cancelExpenseHandler} submit={editExpenseHandler}/>
+          <ExpensesInput hasId = {hasId ? "Update" : "Add"} oncancel={cancelExpenseHandler} submit={editExpenseHandler} defaultValue = {selectedMeal}/>
        
           {hasId && (
             <View style = {styles.deletecontainer}>
