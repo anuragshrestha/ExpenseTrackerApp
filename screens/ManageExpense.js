@@ -28,20 +28,12 @@ function ManageExpense({route, navigation}){
          navigation.goBack();
       }
 
-      function editExpenseHandler(){
+      function editExpenseHandler(expenseData){
 
         if(hasId){
-          expenseContext.updateExpense(editExpense, {
-            description: 'test',
-            amount: 29.3,
-            date: new Date('2024-02-8')
-          });
+          expenseContext.updateExpense(editExpense, expenseData);
         } else{
-          expenseContext.addExpense({
-            description: 'hello',
-            amount: 33.3,
-            date: new Date('2024-02-9')
-          })
+          expenseContext.addExpense(expenseData)
         }
 
          navigation.goBack();
@@ -51,16 +43,8 @@ function ManageExpense({route, navigation}){
 
    return(
         <View style = {styles.container}>
-          <ExpensesInput/>
-          <View style = {styles.button}>
-          <Button  style = {styles.buttons}   onPress={cancelExpenseHandler}>
-             Cancel
-            </Button>
-          <Button style ={styles.buttons}  onPress={editExpenseHandler} >
-           {hasId? 'Update' : 'Add'}
-            </Button>
-
-          </View>
+          <ExpensesInput hasId = {hasId ? "Update" : "Add"} oncancel={cancelExpenseHandler} submit={editExpenseHandler}/>
+       
           {hasId && (
             <View style = {styles.deletecontainer}>
               <IconButton icon='trash' color= "maroon" size = {30} onPress={deleteExpensehandler}   />
