@@ -2,13 +2,14 @@ import { Keyboard, View, TextInput, StyleSheet } from "react-native";
 import Input from "./Input";
 import { useState } from "react";
 import Button from "../../UI/Button";
+import { formatDate } from "../../util/date";
 
 
-function ExpensesInput({hasId, oncancel, submit}) {
+function ExpensesInput({hasId, oncancel, submit, defaultValue}) {
   const [inputValue, setInputValue] = useState({
-    amount: "",
-    date: "",
-    description: "",
+    amount: defaultValue?  defaultValue.amount.toString() : "",
+    date: defaultValue? formatDate(defaultValue.date):  "",
+    description:  defaultValue? defaultValue.description : "",
   });
 
   function amountchangeHandler(identifier, enteredValue) {
