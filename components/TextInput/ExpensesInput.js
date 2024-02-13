@@ -1,4 +1,4 @@
-import { Keyboard, View, TextInput, StyleSheet } from "react-native";
+import { Keyboard, View, TextInput, StyleSheet, Alert } from "react-native";
 import Input from "./Input";
 import { useState } from "react";
 import Button from "../../UI/Button";
@@ -11,6 +11,11 @@ function ExpensesInput({hasId, oncancel, submit, defaultValue}) {
     date: defaultValue? formatDate(defaultValue.date):  "",
     description:  defaultValue? defaultValue.description : "",
   });
+
+
+  const [amountValid, setIsAmountValid] = useState(true);
+  const [isDescriptionValid, setIsDescriptionValid] = useState(true);
+  const [isDateValid, setIsDateValid] = useState(true);
 
   function amountchangeHandler(identifier, enteredValue) {
     setInputValue((value) => {
@@ -28,6 +33,22 @@ function ExpensesInput({hasId, oncancel, submit, defaultValue}) {
       description : inputValue.description,
       date : new Date(inputValue.date),
     };
+
+      const amountValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
+      const isDescriptionValid = expenseData.description.trim().length > 0;
+      const isDateValid = expenseData.date.toString() !== 'Invalid Date';
+
+
+       // Update validation flags based on the current input
+    setIsAmountValid(amountValid);
+    setIsDescriptionValid(isDescriptionValid);
+    setIsDateValid(isDateValid);
+
+      if(!amountValid || !isDescriptionValid || !isDateValid){
+        Alert.alert('Invalid input', "Please enter a valid value");
+        return;
+      }
+
       submit(expenseData);
    }
   return (
@@ -40,9 +61,11 @@ function ExpensesInput({hasId, oncancel, submit, defaultValue}) {
           onChangeText: amountchangeHandler.bind(this, "description"),
           value: inputValue.description,
         }}
+        invalid= {!isDescriptionValid}
       />
       <Input
         children="Amount"
+        invalid={!amountValid}
         inputConfig={{
           maxLength: 10,
           onChangeText: amountchangeHandler.bind(this, "amount"),
@@ -52,6 +75,7 @@ function ExpensesInput({hasId, oncancel, submit, defaultValue}) {
       />
       <Input
         children="Date"
+        invalid={!isDateValid}
         inputConfig={{
           KeyboardType: "default",
           placeholder: 'YYYY-MM-DD',
