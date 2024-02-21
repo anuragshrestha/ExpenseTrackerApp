@@ -4,7 +4,7 @@ import {Text, View , StyleSheet}from 'react-native'
 import Button from '../UI/Button';
 import { ExpensesContext } from '../store/expenses-contextAPI';
 import ExpensesInput from '../components/TextInput/ExpensesInput';
- 
+ import { storeExpenses } from '../util/http';
 
  
 function ManageExpense({route, navigation}){
@@ -35,6 +35,7 @@ function ManageExpense({route, navigation}){
         if(hasId){
           expenseContext.updateExpense(editExpense, expenseData);
         } else{
+          storeExpenses(expenseData);
           expenseContext.addExpense(expenseData)
         }
 
