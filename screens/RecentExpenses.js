@@ -1,14 +1,17 @@
 import {Text }from 'react-native'
 import ExpensesOutput from '../components/ExpensesOutput.js/ExpensesOutput'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { ExpensesContext } from '../store/expenses-contextAPI';
 import { getDate } from '../util/date';
- 
+ import { fetchExpenses } from '../util/http';
  
 
  
 function RecentExpenses(){
 
+useEffect(( ) =>{
+   fetchExpenses();
+}, []);
 
    const expenseContext = useContext(ExpensesContext);
    const recentExpenses = expenseContext.expenses.filter((expense) => {
