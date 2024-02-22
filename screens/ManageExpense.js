@@ -30,13 +30,13 @@ function ManageExpense({route, navigation}){
          navigation.goBack();
       }
 
-      function editExpenseHandler(expenseData){
+      async function editExpenseHandler(expenseData){
 
         if(hasId){
           expenseContext.updateExpense(editExpense, expenseData);
         } else{
-          storeExpenses(expenseData);
-          expenseContext.addExpense(expenseData)
+         const id =  await storeExpenses(expenseData);
+          expenseContext.addExpense({...expenseData, id : id})
         }
 
          navigation.goBack();
