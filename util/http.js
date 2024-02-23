@@ -13,7 +13,7 @@ export async function storeExpenses(expenseData) {
 
 export async function fetchExpenses() {
   const response = await axios.get(
-    "https://reactnative-expense-app-default-rtdb.firebaseiocom/expenses.json"
+    "https://reactnative-expense-app-default-rtdb.firebaseio.com/expenses.json"
   );
 
   const expenses = [];
