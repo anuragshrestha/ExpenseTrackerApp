@@ -5,23 +5,37 @@ import { ExpensesContext } from "../store/expenses-contextAPI";
 import { getDate } from "../util/date";
 import { fetchExpenses } from "../util/http";
 import OverLoading from "../util/OverLoading";
+import ErrorLoading from "../util/ErrorOverLay";
 
 function RecentExpenses() {
 
    const [isfetching, setFetching] =  useState([true]);
+   const[error, setError] = useState();
    const expenseContext = useContext(ExpensesContext);
 
   useEffect(() => {
     async function getExpenses() {
       setFetching(true);
-      const expenses = await fetchExpenses();
+      try{
+        const expenses = await fetchExpenses();
+        expenseContext.setExpenses(expenses);
+      }catch(error){
+        setError('Could not fetch Expenses.')
+      }
+     
       setFetching(false);
-           expenseContext.setExpenses(expenses);
+          
     }
     getExpenses();
   }, []);
 
-  
+   function errorHandling(){
+    setError(null);
+   }
+
+  if(error && !isfetching){
+    <ErrorLoading message={error}  onConfirm = {errorHandling}  />
+  }
    if(isfetching){
     return <OverLoading/>
    }
